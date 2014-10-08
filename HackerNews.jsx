@@ -1,23 +1,33 @@
 /** @jsx React.DOM */
 
 var HackerNews = React.createClass({
+  mixins: [ReactFireMixin],
+
   componentWillMount: function() {
     this.firebaseRoot = new Firebase("https://hacker-news.firebaseio.com/v0/topstories");
     this.firebaseRootListener = function(dataSnapshot) {
       var nextStoryIds = dataSnapshot.val();
-      var nextStories = new Array(nextStoryIds.length);
+      var prevStoryIds = this.state.storyIds.slice();
 
-      var firebaseRefs = nextStoryIds.map(function(id, index) {
-        var url = "https://hacker-news.firebaseio.com/v0/item/" + id;
-        var ref = new Firebase(url);
+      // Bind to any new stories
+      nextStoryIds.forEach(function(storyId) {
+        var index = prevStoryIds.indexOf(storyId);
+        if (index < 0) {
+          this.bindAsObject(
+            new Firebase("https://hacker-news.firebaseio.com/v0/item/" + storyId),
+            "story" + storyId
+          );
+        }
 
-        ref.on("value", function(dataSnapshot) {
-          nextStories[index] = dataSnapshot.val();
-          this.forceUpdate();
-        }.bind(this));
+        prevStoryIds.splice(index, 1);
       }, this);
 
-      this.setState({stories: nextStories});
+      // Unbind any stories that are not in the new list
+      prevStoryIds.forEach(function(storyId) {
+        this.unbind("story" + storyId);
+      }, this)
+
+      this.setState({storyIds: nextStoryIds});
     }.bind(this)
 
     this.firebaseRoot.on("value", this.firebaseRootListener);
@@ -25,11 +35,11 @@ var HackerNews = React.createClass({
 
   componentWillUnmount: function() {
     this.firebaseRoot.off("value", this.firebaseRootListener);
-  },  
+  },
 
   getInitialState: function() {
     return {
-      stories: []
+      storyIds: []
     };
   },
 
@@ -47,9 +57,11 @@ var HackerNews = React.createClass({
           </div>
           <div className="panel-body">
             <ol className="story-list">
-              {this.state.stories.map(function(story) {
-                return <Story story={story} />;
-              })}
+              {this.state.storyIds.map(function(storyId) {
+                return this.state["story" + storyId] == null ?
+                  null :
+                  <Story key={storyId} story={this.state["story" + storyId]} />;
+              }, this)}
             </ol>
           </div>
         </div>
@@ -74,10 +86,18 @@ var Story = React.createClass({
     var story = this.props.story;
     var storyMoment = moment(story.time * 1000);
 
+    var url, urlNode;
+    if (story.type === "job" || story.type === "poll") {
+      url = "https://news.ycombinator.com/item?id=" + story.id;
+    } else if (story.url != null) {
+      url = story.url;
+      urlNode = <small>({parseDomain(url)})</small>;
+    }
+
     return (
       <li>
         <h4 className="story-heading">
-          <a href={story.url}>{story.title}</a> <small>({parseDomain(story.url)})</small>
+          <a href={url}>{story.title}</a> {urlNode}
         </h4>
         <p className="text-muted">
           {story.score} points by { }
