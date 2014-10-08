@@ -26,6 +26,7 @@
   "dependencies": {
     "react": "~0.11.2",
     "firebase": "~1.1.0",
-    "momentjs": "~2.8.3"
+    "momentjs": "~2.8.3",
+    "bootstrap": "~3.2.0"
   }
 }
