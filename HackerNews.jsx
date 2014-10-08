@@ -84,7 +84,7 @@ var Story = React.createClass({
           <a className="text-muted" href={"https://news.ycombinator.com/user?id=" + story.by}>
             {story.by}
           </a> { }
-          <time datetime={storyMoment.utc()} title={storyMoment.utc()}>
+          <time dateTime={storyMoment.utc()} title={storyMoment.utc()}>
             {storyMoment.fromNow()}</time> | { }
           <a className="text-muted" href={"https://news.ycombinator.com/item?id=" + story.id}>comments</a>
         </p>
