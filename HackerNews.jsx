@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 
 var HackerNews = React.createClass({
-  mixins: [NestedFirebaseMixin],
-
   componentWillMount: function() {
     this.firebaseRoot = new Firebase("https://hacker-news.firebaseio.com/v0/topstories");
     this.firebaseRootListener = function(dataSnapshot) {
