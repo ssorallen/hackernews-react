@@ -87,7 +87,7 @@ var Story = React.createClass({
     var storyMoment = moment(story.time * 1000);
 
     var url, urlNode;
-    if (story.type === "job" || story.type === "poll") {
+    if (story.type === "job" || story.type === "poll" || story.url === "") {
       url = "https://news.ycombinator.com/item?id=" + story.id;
     } else if (story.url != null) {
       url = story.url;
