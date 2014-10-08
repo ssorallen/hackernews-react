@@ -38,6 +38,11 @@ var HackerNews = React.createClass({
       <div className="container">
         <div className="panel panel-default">
           <div className="panel-heading">
+            <div className="pull-right">
+              <a href="https://github.com/ssorallen/hackernews-react">
+                GitHub Project
+              </a>
+            </div>
             <h1 className="panel-title">Hacker News</h1>
           </div>
           <div className="panel-body">
@@ -48,6 +53,11 @@ var HackerNews = React.createClass({
             </ol>
           </div>
         </div>
+        <footer>
+          <p className="text-muted">
+            Created by <a href="https://twitter.com/ssorallen">@ssorallen</a>
+          </p>
+        </footer>
       </div>
     );
   }
