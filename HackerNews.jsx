@@ -48,7 +48,7 @@ var HackerNews = React.createClass({
           <div className="panel-body">
             <ol className="story-list">
               {this.state.stories.map(function(story) {
-                return <Story story={story} />;
+                return <Story key={story.id} story={story} />;
               })}
             </ol>
           </div>
