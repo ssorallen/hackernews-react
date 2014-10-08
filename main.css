@@ -1,0 +1,40 @@
+a:link {
+  color: #000000;
+}
+
+a:visited,
+a.text-muted {
+  color: #777;
+}
+
+ol {
+  padding-left: 30px;
+}
+
+.panel {
+  margin-top: 10px;
+}
+
+.panel-default {
+  border: 0;
+}
+
+.panel-default .panel-heading {
+  background-color: #ff6600;
+}
+
+.panel-default .panel-body {
+  background-color: #f6f6ef;
+}
+
+.story-heading {
+  margin-bottom: 0;
+}
+
+.story-list > li:first-child .story-heading {
+  margin-top: 0;
+}
+
+.story-list > li:last-child p {
+  margin-bottom: 0;
+}

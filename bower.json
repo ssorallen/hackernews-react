@@ -1,0 +1,31 @@
+{
+  "name": "hackernews-react",
+  "version": "0.0.0",
+  "authors": [
+    "Ross Allen <rossgit@gmail.com>"
+  ],
+  "description": "Hacker News Client written with React.js and ReactFire",
+  "main": "main.js",
+  "keywords": [
+    "hackernews",
+    "react",
+    "reactfire",
+    "firebase",
+    "reactjs"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ssorallen/hackernews-react",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.11.2",
+    "firebase": "~1.1.0",
+    "momentjs": "~2.8.3"
+  }
+}
