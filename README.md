@@ -3,7 +3,9 @@ hackernews-react
 
 A Hacker News API Client in React + Firebase
 
-* Demo: [http://ssorallen.com/hackernews-react](http://ssorallen.com/hackernews-react)
+## Demo
+
+[https://ssorallen.github.io/hackernews-react/](https://ssorallen.github.io/hackernews-react/)
 
 #### Built on the Hacker News API
 
